@@ -59,7 +59,7 @@ userSchema.pre("save",async function(next){
     //  i) field to bcrypt
     //  ii) No. of round to add salt(extra characters to enbrypt the original password )
     if(!this.isModified("password")) return next();
-    this.password = bcrypt.hash(this.password, 10);
+    this.password = await bcrypt.hash(this.password, 10);
     next()
 
 
