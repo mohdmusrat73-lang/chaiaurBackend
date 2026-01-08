@@ -1,1 +1,1 @@
-export const DB_NAME = "firstBackendDatabse"
+export const DB_NAME = "firstBackendDatabseOnChai"
