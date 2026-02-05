@@ -3,7 +3,7 @@ import { User } from "../models/user.models.js"
 import { ApiError } from "../utils/ApiError.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import jwt from "jsomwebtoken";
+import jwt from "jsonwebtoken";
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
@@ -250,7 +250,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
 })
 
-const changeCurrentPassword = asyncHandler(async (res, res) => {
+const changeCurrentPassword = asyncHandler(async (req, res) => {
     const { oldPassword, newPassword } = req.body;
     const user = await User.findId(req.user._id);
     const isPasswordCorrect = await user.isPasswordCorrect(oldPassword);
@@ -457,8 +457,8 @@ const getWatchHistory = asyncHandler(async (rq, res) => {
                         }
                     },
                     {
-                        $addFields:{
-                            ower:{
+                        $addFields: {
+                            ower: {
                                 $first: "$ower"
                             }
                         }
@@ -470,8 +470,8 @@ const getWatchHistory = asyncHandler(async (rq, res) => {
 
 
     return res
-    .status(200)
-    .json(new ApiResponse(200, user[0].watchHistory, "Watch History Fetched Successfully"))
+        .status(200)
+        .json(new ApiResponse(200, user[0].watchHistory, "Watch History Fetched Successfully"))
 })
 export {
     registerUser,
